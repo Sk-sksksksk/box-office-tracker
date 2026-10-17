@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Indian Box Office Tracker — Weekly Top 10 &amp; Consistency Rating</title>
+<style>
+:root{--bg:#eef1f6;--surf:#fff;--ink:#14213d;--mute:#5d6882;--line:#d5dbe6;--trade:#0f7b8a;--prod:#d98e00;--warn:#c0392b;--mod:#b76e00;--ok:#1f7a4d;--hd:#14213d;--hdink:#f4f1e8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--surf:#171e32;--ink:#e9ecf4;--mute:#97a1ba;--line:#2a3350;--trade:#3fc1d1;--prod:#f2b233;--warn:#ff7b6b;--mod:#f7b955;--ok:#5ad08e;--hd:#171e32;--hdink:#f4f1e8}}
+:root[data-theme="dark"]{--bg:#0d1220;--surf:#171e32;--ink:#e9ecf4;--mute:#97a1ba;--line:#2a3350;--trade:#3fc1d1;--prod:#f2b233;--warn:#ff7b6b;--mod:#f7b955;--ok:#5ad08e;--hd:#171e32;--hdink:#f4f1e8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.top{background:var(--hd);color:var(--hdink);padding:26px 20px 20px;border-bottom:6px solid var(--prod);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px}
+.top h1{margin:0;font:700 clamp(24px,4.5vw,38px)/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.01em}
+.top p{margin:7px 0 0;max-width:66ch;opacity:.88;font-size:14.5px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-top{padding:8px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);color:var(--hdink);font-weight:600;font-size:13px;cursor:pointer}
+.btn-top:hover{background:rgba(255,255,255,.2)}
+.btn-top.accent{background:var(--prod);color:#1b1400;border-color:var(--prod)}
+.banner{background:var(--prod);color:#1b1400;padding:8px 20px;font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+main{max-width:1100px;margin:0 auto;padding:18px 16px 56px}
+.summary-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:16px}
+.stat-box{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:11px 14px}
+.stat-box span{display:block;font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.03em}
+.stat-box b{font:700 22px/1.2 Georgia,serif;display:block;margin-top:2px}
+.stat-box small{font-size:12px;color:var(--mute)}
+.controls{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px;background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.controls-row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;width:100%}
+input[type=search],input[type=text],input[type=number],input[type=date],select{padding:8px 11px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+input[type=search]{flex:1 1 190px}
+.chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.chips-label{font-size:12px;color:var(--mute);font-weight:600;margin-right:2px}
+button{font:inherit;color:var(--ink);cursor:pointer}
+.chip,.seg button{padding:5px 11px;border:1px solid var(--line);background:var(--surf);border-radius:999px;font-size:13px;transition:all .15s}
+.chip[aria-pressed=true],.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+.thr-group{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-left:auto}
+.thr{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mute)}
+.thr b{color:var(--ink);min-width:32px;font-variant-numeric:tabular-nums}
+.wrap{overflow-x:auto;background:var(--surf);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:800px}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+th{font-weight:600;font-size:12.5px;color:var(--mute);cursor:pointer;user-select:none;background:color-mix(in srgb,var(--bg) 50%,var(--surf))}
+th[aria-sort]{color:var(--ink)}
+tbody tr{cursor:pointer;transition:background .12s}
+tbody tr:hover,tbody tr.sel{background:color-mix(in srgb,var(--trade) 11%,transparent)}
+tbody tr:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--trade);outline-offset:-2px}
+tr:last-child td{border-bottom:0}
+.rank-num{font-weight:700;color:var(--mute);width:36px}
+.lang{color:var(--mute);font-size:13px}
+.prem{color:var(--prod);font-weight:600}
+.fl{color:var(--warn);font-weight:600}
+.modc{color:var(--mod);font-weight:600}
+.okc{color:var(--ok);font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.01em}
+.badge.good{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent)}
+.badge.moderate{background:color-mix(in srgb,var(--mod) 15%,transparent);color:var(--mod);border:1px solid color-mix(in srgb,var(--mod) 35%,transparent)}
+.badge.bad{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent)}
+.badge.pending{background:color-mix(in srgb,var(--mute) 14%,transparent);color:var(--mute);border:1px solid color-mix(in srgb,var(--mute) 30%,transparent)}
+.score-pill{font-size:11.5px;opacity:.85;font-weight:600}
+#detail{margin-top:26px}
+.detail-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+#detail h2{margin:0 0 3px;font:700 28px/1.15 Georgia,serif}
+.sub{color:var(--mute);margin:0;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:16px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.card span{display:block;color:var(--mute);font-size:12px}
+.card b{font:700 22px/1.25 Georgia,serif;display:block;margin-top:3px}
+.card small{display:block;margin-top:3px;font-size:12px;color:var(--mute)}
+.toolbar-chart{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.chart{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--mute);font:11px system-ui,sans-serif}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin:8px 2px 16px}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;border-radius:2px}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:18px}
+.panel h3{margin:0 0 6px;font:700 18px Georgia,serif}
+.panel p{margin:0 0 12px;font-size:13.5px;color:var(--mute)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;align-items:end}
+.form-grid label{display:block;font-size:12px;font-weight:600;color:var(--mute);margin-bottom:4px}
+.form-grid input,.form-grid select{width:100%}
+.btn-primary{padding:9px 16px;background:var(--trade);color:#fff;border:0;border-radius:6px;font-weight:600;font-size:13.5px}
+.btn-primary:hover{opacity:.92}
+.btn-secondary{padding:8px 13px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;font-size:13px;font-weight:600}
+.toast{margin-top:10px;padding:8px 12px;border-radius:6px;background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok);font-size:13px;font-weight:600}
+.rubric{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:18px}
+.rubric-card{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:13px}
+.rubric-card b{display:block;margin-bottom:4px;font-size:13.5px}
+.note{font-size:13px;color:var(--mute);margin-top:18px;max-width:85ch}
+.empty{padding:24px;text-align:center;color:var(--mute)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Indian Box Office Tracker — Weekly Top 10</h1>
+    <p>Tracks the Top 10 highest-collecting films of the current week across trade websites and producer figures, with automatic consistency ratings.</p>
+  </div>
+  <div class="top-actions">
+    <button type="button" class="btn-top accent" id="toggleLogBtn">+ Log Weekly / Daily Figure</button>
+    <button type="button" class="btn-top" id="exportCsvBtn">Export CSV</button>
+    <button type="button" class="btn-top" id="themeBtn">Theme</button>
+  </div>
+</header>
+<div class="banner" id="banner">
+  <span id="bannerText">Current Week Window: Oct 10 – Oct 16, 2026 · Automatically ranked by This Week's Net India collection (Top 10 cap active).</span>
+  <div class="seg" style="margin:0">
+    <button type="button" class="chip" id="top10OnlyBtn" aria-pressed="true">Current Week Top 10</button>
+    <button type="button" class="chip" id="allFilmsBtn" aria-pressed="false">All Logged Films</button>
+  </div>
+</div>
+<main>
+  <section class="panel" id="logPanel" hidden>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <h3>Add or Update a Box Office Figure</h3>
+      <button type="button" class="btn-secondary" id="closeLogBtn">Close</button>
+    </div>
+    <p>Log a Net India figure (in Rs crore) for any date. The tracker automatically sums the last 7 days from the latest logged date and updates the Weekly Top 10 leaderboard.</p>
+    <form id="logForm" class="form-grid">
+      <div>
+        <label for="fFilm">Film Title</label>
+        <input type="text" id="fFilm" list="filmList" placeholder="e.g. Drishyam 3: The Conclusion" required value="Drishyam 3: The Conclusion">
+        <datalist id="filmList"></datalist>
+      </div>
+      <div>
+        <label for="fLang">Language</label>
+        <select id="fLang">
+          <option value="Hindi">Hindi</option>
+          <option value="Tamil">Tamil</option>
+          <option value="Telugu">Telugu</option>
+          <option value="Malayalam">Malayalam</option>
+          <option value="Kannada">Kannada</option>
+          <option value="Bengali">Bengali</option>
+          <option value="Punjabi">Punjabi</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="fRel">Release Date</label>
+        <input type="date" id="fRel" required value="2026-10-02">
+      </div>
+      <div>
+        <label for="fDate">Business Date</label>
+        <input type="date" id="fDate" required value="2026-10-16">
+      </div>
+      <div>
+        <label for="fSource">Website / Source</label>
+        <select id="fSource">
+          <option value="Sacnilk">Sacnilk</option>
+          <option value="Box Office India" selected>Box Office India</option>
+          <option value="Bollywood Hungama">Bollywood Hungama</option>
+          <option value="Ormax Media">Ormax Media</option>
+          <option value="Producer / Official poster">Producer / Official poster</option>
+        </select>
+      </div>
+      <div>
+        <label for="fType">Figure Type</label>
+        <select id="fType">
+          <option value="Trade estimate">Trade estimate</option>
+          <option value="Producer-reported">Producer-reported</option>
+        </select>
+      </div>
+      <div>
+        <label for="fGross">Net India (Rs cr)</label>
+        <input type="number" id="fGross" step="0.01" min="0.01" placeholder="e.g. 14.50" required>
+      </div>
+      <div>
+        <button type="submit" class="btn-primary" style="width:100%">Save Figure</button>
+      </div>
+    </form>
+    <div id="logToast" class="toast" hidden></div>
+  </section>
+
+  <div class="summary-strip" id="summaryStrip"></div>
+
+  <div class="controls">
+    <div class="controls-row">
+      <input type="search" id="q" placeholder="Search weekly top 10..." aria-label="Search films">
+      <div class="chips" id="chips"></div>
+      <div class="chips" id="ratingChips"></div>
+    </div>
+    <div class="controls-row" style="border-top:1px solid var(--line);padding-top:10px;margin-top:2px">
+      <div class="chips">
+        <span class="chips-label">Rating mode:</span>
+        <button type="button" class="chip" id="basisTradeBtn" aria-pressed="true">Website Spread Only</button>
+        <button type="button" class="chip" id="basisBothBtn" aria-pressed="false">Combined (Websites + Producer)</button>
+      </div>
+      <div class="thr-group">
+        <label class="thr">Good rating &le; <input type="range" id="goodThr" min="1" max="12" value="5"><b id="goodThrv">5%</b></label>
+        <label class="thr">Bad / Flag &gt; <input type="range" id="thr" min="4" max="25" value="10"><b id="thrv">10%</b></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap"><table id="lb"><thead></thead><tbody></tbody></table></div>
+
+  <section id="detail" hidden></section>
+
+  <div class="rubric">
+    <div class="rubric-card">
+      <b><span class="badge good">Good Rating</span> Constant Across Websites</b>
+      Trade sources stay within the Good threshold (default &le;5% spread). High confidence in the weekly numbers.
+    </div>
+    <div class="rubric-card">
+      <b><span class="badge moderate">Moderate Rating</span> Minor Website Variance</b>
+      Trade estimates vary moderately (between 5% and 10% spread) across websites.
+    </div>
+    <div class="rubric-card">
+      <b><span class="badge bad">Bad Rating</span> High Website Disagreement</b>
+      Trade sources diverge beyond the flag threshold (&gt;10% spread). Verify primary sources.
+    </div>
+  </div>
+
+  <p class="note" id="footNote">Net India, in Rs crore. "This Week Trade" sums daily trade averages within the current 7-day window (Oct 10–16, 2026) and caps the leaderboard at the Top 10 highest-collecting movies of the week.</p>
+</main>
+<script>
+const INJECTED=null;
+const $=s=>document.querySelector(s);
+
+function currentWeekFilms(){
+  if(INJECTED&&INJECTED.films&&INJECTED.films.length)return JSON.parse(JSON.stringify(INJECTED.films));
+  return [
+    {name:"Drishyam 3: The Conclusion",lang:"Hindi",rel:"2026-10-02",days:[
+      {date:"2026-10-10",tr:{"Sacnilk":18.50,"Bollywood Hungama":17.90,"Box Office India":18.10},p:20.20},
+      {date:"2026-10-11",tr:{"Sacnilk":24.20,"Bollywood Hungama":23.60,"Box Office India":23.85},p:26.50},
+      {date:"2026-10-12",tr:{"Sacnilk":11.10,"Bollywood Hungama":10.80,"Box Office India":10.95},p:12.40},
+      {date:"2026-10-13",tr:{"Sacnilk":9.80,"Bollywood Hungama":9.50,"Box Office India":9.60},p:11.00},
+      {date:"2026-10-14",tr:{"Sacnilk":8.60,"Bollywood Hungama":8.30,"Box Office India":8.45},p:9.50},
+      {date:"2026-10-15",tr:{"Sacnilk":8.10,"Bollywood Hungama":7.90,"Box Office India":8.00},p:9.10},
+      {date:"2026-10-16",tr:{"Sacnilk":7.20,"Bollywood Hungama":6.80,"Box Office India":7.05},p:8.00}
+    ]},
+    {name:"Jailer 2",lang:"Tamil",rel:"2026-10-15",days:[
+      {date:"2026-10-15",tr:{"Sacnilk":38.50,"Bollywood Hungama":36.20,"Box Office India":35.80},p:45.00},
+      {date:"2026-10-16",tr:{"Sacnilk":21.20,"Bollywood Hungama":20.10,"Box Office India":19.90},p:25.50}
+    ]},
+    {name:"Comrade Kalyan",lang:"Telugu",rel:"2026-10-09",days:[
+      {date:"2026-10-10",tr:{"Sacnilk":3.00,"Box Office India":2.85},p:3.40},
+      {date:"2026-10-11",tr:{"Sacnilk":3.05,"Box Office India":2.90},p:3.50},
+      {date:"2026-10-12",tr:{"Sacnilk":1.45,"Box Office India":1.40},p:1.70},
+      {date:"2026-10-13",tr:{"Sacnilk":1.35,"Box Office India":1.28},p:1.55},
+      {date:"2026-10-14",tr:{"Sacnilk":1.10,"Box Office India":1.05},p:1.30},
+      {date:"2026-10-15",tr:{"Sacnilk":0.55,"Box Office India":0.52},p:0.65},
+      {date:"2026-10-16",tr:{"Sacnilk":0.50,"Box Office India":0.48},p:0.60}
+    ]},
+    {name:"Baththa",lang:"Tamil",rel:"2026-10-01",days:[
+      {date:"2026-10-10",tr:{"Sacnilk":3.10,"Box Office India":2.95},p:3.40},
+      {date:"2026-10-11",tr:{"Sacnilk":3.20,"Box Office India":3.05},p:3.55},
+      {date:"2026-10-12",tr:{"Sacnilk":1.20,"Box Office India":1.12},p:1.35},
+      {date:"2026-10-13",tr:{"Sacnilk":1.15,"Box Office India":1.08},p:1.30},
+      {date:"2026-10-14",tr:{"Sacnilk":1.02,"Box Office India":0.96},p:1.15},
+      {date:"2026-10-15",tr:{"Sacnilk":0.85,"Box Office India":0.80},p:0.95}
+    ]},
+    {name:"Ranabaali",lang:"Telugu",rel:"2026-10-16",days:[
+      {date:"2026-10-16",tr:{"Sacnilk":7.14,"Bollywood Hungama":6.40,"Box Office India":6.25},p:9.10}
+    ]},
+    {name:"Vvan - Force of the Forrest",lang:"Hindi",rel:"2026-09-25",days:[
+      {date:"2026-10-10",tr:{"Sacnilk":1.40,"Bollywood Hungama":1.32,"Box Office India":1.35},p:1.55},
+      {date:"2026-10-11",tr:{"Sacnilk":1.85,"Bollywood Hungama":1.75,"Box Office India":1.80},p:2.05},
+      {date:"2026-10-12",tr:{"Sacnilk":0.75,"Bollywood Hungama":0.70,"Box Office India":0.72},p:0.85},
+      {date:"2026-10-13",tr:{"Sacnilk":0.68,"Bollywood Hungama":0.64,"Box Office India":0.65},p:0.75},
+      {date:"2026-10-14",tr:{"Sacnilk":0.60,"Bollywood Hungama":0.56,"Box Office India":0.58},p:0.68},
+      {date:"2026-10-15",tr:{"Sacnilk":0.52,"Bollywood Hungama":0.49,"Box Office India":0.50},p:0.60}
+    ]},
+    {name:"Other Mommy",lang:"Other",rel:"2026-10-09",days:[
+      {date:"2026-10-10",tr:{"Sacnilk":0.85,"Bollywood Hungama":0.82},p:0.90},
+      {date:"2026-10-11",tr:{"Sacnilk":0.95,"Bollywood Hungama":0.91},p:1.00},
+      {date:"2026-10-12",tr:{"Sacnilk":0.42,"Bollywood Hungama":0.40},p:0.45},
+      {date:"2026-10-13",tr:{"Sacnilk":0.38,"Bollywood Hungama":0.36},p:0.40},
+      {date:"2026-10-14",tr:{"Sacnilk":0.35,"Bollywood Hungama":0.34},p:0.38},
+      {date:"2026-10-15",tr:{"Sacnilk":0.34,"Bollywood Hungama":0.32},p:0.36}
+    ]},
+    {name:"Prahaar - The Ujjwal Nikam Story",lang:"Hindi",rel:"2026-10-16",days:[
+      {date:"2026-10-16",tr:{"Sacnilk":2.45,"Bollywood Hungama":2.25,"Box Office India":2.10},p:3.10}
+    ]},
+    {name:"Street Fighter (Tamil)",lang:"Tamil",rel:"2026-10-16",days:[
+      {date:"2026-10-16",tr:{"Sacnilk":0.94,"Box Office India":0.88},p:1.05}
+    ]},
+    {name:"The Eken: Kerala-e-Kurukshetra",lang:"Bengali",rel:"2026-10-15",days:[
+      {date:"2026-10-15",tr:{"Sacnilk":0.42,"Box Office India":0.39},p:0.48},
+      {date:"2026-10-16",tr:{"Sacnilk":0.35,"Box Office India":0.33},p:0.40}
+    ]}
+  ];
+}
+
+const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const S={
+  key:"weekTotal",dir:-1,lang:"All",rating:"All",q:"",sel:1,cum:false,
+  combineProd:false,top10Only:true
+};
+
+let customEntries=[];
+try{
+  const saved=localStorage.getItem("bo_tracker_weekly_v1");
+  if(saved)customEntries=JSON.parse(saved);
+}catch(e){}
+
+function buildFilmsList(){
+  const base=currentWeekFilms();
+  const map=new Map();
+  base.forEach(f=>{
+    if(!map.has(f.name))map.set(f.name,JSON.parse(JSON.stringify(f)));
+  });
+  customEntries.forEach(e=>{
+    let f=map.get(e.film);
+    if(!f){
+      f={name:e.film,lang:e.lang||"Hindi",rel:e.rel||e.date,days:[]};
+      map.set(e.film,f);
+    }
+    let d=f.days.find(x=>x.date===e.date);
+    if(!d){
+      d={date:e.date,tr:{},p:null};
+      f.days.push(d);
+    }
+    if(e.type==="Producer-reported"){
+      d.p=+e.gross;
+    }else{
+      d.tr[e.source]=+e.gross;
+    }
+  });
+  const allDates=[...map.values()].flatMap(f=>f.days.map(d=>d.date)).sort();
+  const maxDateStr=allDates.length?allDates[allDates.length-1]:"2026-10-16";
+  const maxDate=new Date(maxDateStr);
+  const weekStart=new Date(maxDate);
+  weekStart.setUTCDate(weekStart.getUTCDate()-6);
+
+  const list=[...map.values()].map((f,i)=>{
+    f.id=i+1;
+    f.days.forEach(d=>{
+      d.n=Math.max(1,Math.round((new Date(d.date)-new Date(f.rel))/864e5)+1);
+      d.dt=new Date(d.date);
+      d.inWeek=d.dt>=weekStart&&d.dt<=maxDate;
+      const v=Object.values(d.tr||{});
+      d.avg=v.length?mean(v):null;
+      d.mn=v.length?Math.min(...v):null;
+      d.mx=v.length?Math.max(...v):null;
+      d.sp=v.length>1&&d.mn>0?(d.mx-d.mn)/d.mn:null;
+      d.p=d.p==null?null:d.p;
+      d.pgap=d.avg&&d.p!=null?(d.p-d.avg)/d.avg:null;
+    });
+    f.days.sort((a,b)=>a.dt-b.dt);
+    f.srcs=[...new Set(f.days.flatMap(d=>Object.keys(d.tr||{})))].sort();
+    return f;
+  });
+  return {list,weekStart,maxDate};
+}
+
+let built=buildFilmsList();
+let films=built.list;
+const GOOD_TH=()=>+$("#goodThr").value/100;
+const BAD_TH=()=>+$("#thr").value/100;
+const fmt=x=>x==null?"–":x.toFixed(2);
+const dt=d=>d.toLocaleDateString("en-IN",{day:"numeric",month:"short",timeZone:"UTC"});
+
+function rateSpread(sp,pgap){
+  if(sp==null)return{label:"Needs 2+ sources",cls:"pending",rank:0};
+  const g=GOOD_TH(),b=BAD_TH();
+  const eff=S.combineProd&&pgap!=null?Math.max(sp,Math.abs(pgap)*0.6):sp;
+  if(eff<=g)return{label:"Good",cls:"good",rank:3};
+  if(eff<=b)return{label:"Moderate",cls:"moderate",rank:2};
+  return{label:"Bad",cls:"bad",rank:1};
+}
+
+function stats(f){
+  const activeDays=S.top10Only?f.days.filter(d=>d.inWeek):f.days;
+  const td=activeDays.filter(d=>d.avg!=null);
+  const allTd=f.days.filter(d=>d.avg!=null);
+  const both=td.filter(d=>d.p!=null);
+  const chk=activeDays.filter(d=>d.sp!=null);
+  const weekTotal=td.reduce((a,d)=>a+d.avg,0);
+  const total=allTd.reduce((a,d)=>a+d.avg,0);
+  const tb=both.reduce((a,d)=>a+d.avg,0);
+  const pt=both.reduce((a,d)=>a+d.p,0);
+  const prem=tb>0?pt/tb-1:null;
+  const avgSp=chk.length?mean(chk.map(d=>d.sp)):null;
+  const maxSp=chk.length?Math.max(...chk.map(d=>d.sp)):null;
+  const flags=chk.filter(d=>d.sp>BAD_TH()).length;
+  const rInfo=rateSpread(avgSp,prem);
+  let score=null;
+  if(avgSp!=null){
+    const flagRatio=flags/chk.length;
+    const prodPenalty=S.combineProd&&prem!=null?Math.min(25,Math.abs(prem)*60):0;
+    score=Math.max(0,Math.min(100,Math.round(100-avgSp*380-flagRatio*25-prodPenalty)));
+  }
+  let prodAlign="–";
+  if(prem!=null){
+    const ap=Math.abs(prem);
+    prodAlign=ap<=GOOD_TH()?"Aligned":ap<=BAD_TH()?"Moderate gap":prem>0?"Inflated":"Understated";
+  }
+  return{
+    ...f,weekTotal,total,pt:both.length?pt:null,prem,
+    avgSp,maxSp,flags,chk:chk.length,nd:activeDays.length,
+    rating:rInfo.label,rCls:rInfo.cls,rRank:rInfo.rank,score,prodAlign
+  };
+}
+
+function getVisibleRows(){
+  let allSt=films.map(stats);
+  if(S.top10Only){
+    allSt=allSt.filter(f=>f.weekTotal>0).sort((a,b)=>b.weekTotal-a.weekTotal).slice(0,10);
+  }
+  allSt.forEach((f,idx)=>{f.weekRank=idx+1});
+  return allSt;
+}
+
+function renderSummaryStrip(){
+  const vis=getVisibleRows();
+  const rated=vis.filter(f=>f.avgSp!=null);
+  const goodCnt=rated.filter(f=>f.rating==="Good").length;
+  const modCnt=rated.filter(f=>f.rating==="Moderate").length;
+  const badCnt=rated.filter(f=>f.rating==="Bad").length;
+  const weekSum=vis.reduce((a,f)=>a+f.weekTotal,0);
+  $("#summaryStrip").innerHTML=`
+    <div class="stat-box"><span>Weekly Top 10 Gross</span><b>₹${weekSum.toFixed(2)} cr</b><small>${dt(built.weekStart)} – ${dt(built.maxDate)}</small></div>
+    <div class="stat-box"><span>Good Consistency</span><b class="okc">${goodCnt} films</b><small>Spread &le;${(GOOD_TH()*100).toFixed(0)}% across sites</small></div>
+    <div class="stat-box"><span>Moderate Variance</span><b class="modc">${modCnt} films</b><small>Spread ${(GOOD_TH()*100).toFixed(0)}%–${(BAD_TH()*100).toFixed(0)}%</small></div>
+    <div class="stat-box"><span>Bad / High Variance</span><b class="fl">${badCnt} films</b><small>Spread &gt;${(BAD_TH()*100).toFixed(0)}% across sites</small></div>
+  `;
+}
+
+const cols=[
+  ["weekRank","#"],
+  ["name","Film"],
+  ["lang","Language"],
+  ["weekTotal","This Week Trade"],
+  ["pt","This Week Producer"],
+  ["prem","Producer Gap"],
+  ["avgSp","Avg Spread"],
+  ["flags","Flagged Days"],
+  ["score","Consistency Rating"]
+];
+
+function renderLb(){
+  let rows=getVisibleRows().filter(f=>
+    (S.lang==="All"||f.lang===S.lang)&&
+    (S.rating==="All"||f.rating===S.rating)&&
+    f.name.toLowerCase().includes(S.q)
+  );
+  const k=S.key,val=x=>x[k]??-1e12;
+  rows.sort((a,b)=>(val(a)>val(b)?1:val(a)<val(b)?-1:0)*S.dir);
+  $("#lb thead").innerHTML="<tr>"+cols.map(([c,l])=>`<th data-k="${c}" tabindex="0" ${k===c?`aria-sort="${S.dir>0?"ascending":"descending"}"`:""}>${l}${k===c?(S.dir>0?" ▲":" ▼"):""}</th>`).join("")+"</tr>";
+  $("#lb tbody").innerHTML=rows.length?rows.map(f=>`
+    <tr data-id="${f.id}" tabindex="0" class="${S.sel===f.id?"sel":""}">
+      <td class="rank-num">${f.weekRank}</td>
+      <td><b>${f.name}</b> <span class="lang">(${dt(new Date(f.rel))})</span></td>
+      <td class="lang">${f.lang}</td>
+      <td><b>₹${fmt(f.weekTotal)} cr</b></td>
+      <td>${f.pt==null?"–":"₹"+fmt(f.pt)+" cr"}</td>
+      <td class="prem">${f.prem==null?"–":(f.prem>=0?"+":"")+(f.prem*100).toFixed(1)+"%"}</td>
+      <td class="${f.avgSp==null?"lang":f.avgSp<=GOOD_TH()?"okc":f.avgSp<=BAD_TH()?"modc":"fl"}">${f.avgSp==null?"–":(f.avgSp*100).toFixed(1)+"%"}</td>
+      <td class="${f.flags?"fl":"okc"}">${f.chk?f.flags+"/"+f.chk:"0/0"}</td>
+      <td><span class="badge ${f.rCls}">${f.rating}${f.score!=null?` <span class="score-pill">(${f.score}/100)</span>`:""}</span></td>
+    </tr>`).join(""):`<tr><td colspan="9" class="empty">No films match your current filters.</td></tr>`;
+}
+
+function chart(f){
+  const W=680,H=270,L=46,R=14,T=16,B=28,n=f.days.length;
+  let acc=[0,0,0,0];
+  const v=f.days.map(d=>{
+    if(!S.cum)return{a:d.avg,lo:d.mn,hi:d.mx,p:d.p};
+    acc[0]+=d.avg||0;acc[1]+=d.mn||0;acc[2]+=d.mx||0;
+    if(d.p!=null)acc[3]=acc[3]||0;acc[3]+=d.p||0;
+    return{a:acc[0],lo:acc[1],hi:acc[2],p:d.p==null&&!acc[3]?null:acc[3]};
+  });
+  const max=(Math.max(...v.map(x=>Math.max(x.hi||0,x.p||0)))||1)*1.12;
+  const y=q=>T+(H-T-B)*(1-q/max),step=(W-L-R)/Math.max(1,n),bw=Math.min(step*.52,48);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily collections for ${f.name}">`;
+  for(let i=0;i<=4;i++){
+    const q=max*i/4;
+    s+=`<line x1="${L}" x2="${W-R}" y1="${y(q)}" y2="${y(q)}" stroke="var(--line)"/><text x="${L-6}" y="${y(q)+4}" text-anchor="end">${q.toFixed(q<10?1:0)}</text>`;
+  }
+  const pts=v.map((x,i)=>x.p==null?null:`${L+step*i+step/2},${y(x.p)}`).filter(Boolean);
+  if(pts.length>1)s+=`<polyline points="${pts.join(" ")}" fill="none" stroke="var(--prod)" stroke-width="2" stroke-dasharray="5 4"/>`;
+  v.forEach((x,i)=>{
+    const c=L+step*i+step/2,d=f.days[i];
+    const dRate=rateSpread(d.sp,d.pgap);
+    const barColor=dRate.cls==="bad"?"var(--warn)":dRate.cls==="moderate"?"var(--mod)":"var(--trade)";
+    if(x.a!=null)s+=`<rect x="${c-bw/2}" y="${y(x.a)}" width="${bw}" height="${Math.max(0,y(0)-y(x.a))}" fill="${S.cum?"var(--trade)":barColor}" opacity=".86" rx="2"/>`;
+    if(x.hi!=null&&x.hi>x.lo)s+=`<line x1="${c}" x2="${c}" y1="${y(x.hi)}" y2="${y(x.lo)}" stroke="var(--ink)" stroke-width="1.8"/><line x1="${c-5}" x2="${c+5}" y1="${y(x.hi)}" y2="${y(x.hi)}" stroke="var(--ink)" stroke-width="1.8"/><line x1="${c-5}" x2="${c+5}" y1="${y(x.lo)}" y2="${y(x.lo)}" stroke="var(--ink)" stroke-width="1.8"/>`;
+    if(x.p!=null)s+=`<path d="M${c} ${y(x.p)-6}l6 6l-6 6l-6 -6z" fill="var(--prod)"/>`;
+    s+=`<text x="${c}" y="${H-9}" text-anchor="middle">D${d.n}</text><rect x="${c-step/2}" y="${T}" width="${step}" height="${H-T-B}" fill="transparent"><title>Day ${d.n} (${dt(d.dt)}): Trade avg ₹${fmt(x.a)} cr${x.hi!=null?", range ₹"+fmt(x.lo)+"–"+fmt(x.hi)+" cr":""}, Producer ${x.p==null?"–":"₹"+fmt(x.p)+" cr"} | Rating: ${dRate.label}</title></rect>`;
+  });
+  return s+"</svg>";
+}
+
+function renderDetail(){
+  const f=films.find(x=>x.id===S.sel)||films[0];
+  const el=$("#detail");
+  if(!f){el.hidden=true;return}
+  S.sel=f.id;
+  const st=stats(f);
+  el.hidden=false;
+  const head=f.srcs.map(s=>`<th>${s}</th>`).join("");
+  el.innerHTML=`
+    <div class="detail-hd">
+      <div>
+        <h2>${f.name} <span class="badge ${st.rCls}" style="font-family:system-ui,sans-serif;vertical-align:middle;font-size:14px">${st.rating}${st.score!=null?` · ${st.score}/100`:""}</span></h2>
+        <p class="sub">${f.lang} · Released ${dt(new Date(f.rel))} · ${st.nd} day(s) logged this week</p>
+      </div>
+      <button type="button" class="btn-secondary" id="quickAddForFilmBtn">+ Add Figure for ${f.name}</button>
+    </div>
+    <div class="cards">
+      <div class="card"><span>Consistency Rating</span><b><span class="badge ${st.rCls}" style="font-size:16px">${st.rating}</span></b><small>${st.score!=null?`Score: ${st.score}/100`:"Needs 2+ trade sources"}</small></div>
+      <div class="card"><span>This Week Trade</span><b>₹${fmt(st.weekTotal)} cr</b><small>Avg of ${f.srcs.length} trade site(s)</small></div>
+      <div class="card"><span>This Week Producer</span><b>${st.pt==null?"–":"₹"+fmt(st.pt)+" cr"}</b><small>Producer Premium: ${st.prem==null?"–":(st.prem>=0?"+":"")+(st.prem*100).toFixed(1)+"%"}</small></div>
+      <div class="card"><span>Avg Website Spread</span><b class="${st.avgSp==null?"":st.avgSp<=GOOD_TH()?"okc":st.avgSp<=BAD_TH()?"modc":"fl"}">${st.avgSp==null?"–":(st.avgSp*100).toFixed(1)+"%"}</b><small>Max spread: ${st.maxSp==null?"–":(st.maxSp*100).toFixed(1)+"%"}</small></div>
+      <div class="card"><span>Flagged Days (&gt;${(BAD_TH()*100).toFixed(0)}%)</span><b class="${st.flags?"fl":"okc"}">${st.chk?st.flags+" of "+st.chk:"0 of 0"}</b><small>Producer alignment: ${st.prodAlign}</small></div>
+    </div>
+    <div class="toolbar-chart">
+      <div class="seg">
+        <button type="button" aria-pressed="${!S.cum}" data-cum="0">Daily Collections</button>
+        <button type="button" aria-pressed="${S.cum}" data-cum="1">Cumulative Run</button>
+      </div>
+      <div class="legend" style="margin:0">
+        <span><i style="background:var(--trade)"></i>Trade avg (Good)</span>
+        <span><i style="background:var(--mod)"></i>Moderate spread</span>
+        <span><i style="background:var(--warn)"></i>Bad spread (&gt;${(BAD_TH()*100).toFixed(0)}%)</span>
+        <span><i style="background:var(--ink)"></i>Min–Max range</span>
+        <span><i style="background:var(--prod)"></i>Producer figure</span>
+      </div>
+    </div>
+    <div class="chart">${chart(f)}</div>
+    <div class="wrap" style="margin-top:14px">
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Date</th>${head}<th>Trade Avg</th><th>Spread %</th><th>Producer</th><th>Prod. Gap</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          ${f.days.map(d=>{
+            const r=rateSpread(d.sp,d.pgap);
+            return `<tr>
+              <td>D${d.n}</td>
+              <td>${dt(d.dt)}</td>
+              ${f.srcs.map(s=>`<td>${d.tr&&d.tr[s]!=null?d.tr[s].toFixed(2):"–"}</td>`).join("")}
+              <td><b>${d.avg==null?"–":d.avg.toFixed(2)}</b></td>
+              <td class="${r.cls==="good"?"okc":r.cls==="moderate"?"modc":r.cls==="bad"?"fl":"lang"}">${d.sp==null?"–":(d.sp*100).toFixed(1)+"%"}</td>
+              <td class="prem">${d.p==null?"–":d.p.toFixed(2)}</td>
+              <td class="prem">${d.pgap==null?"–":(d.pgap>=0?"+":"")+(d.pgap*100).toFixed(1)+"%"}</td>
+              <td><span class="badge ${r.cls}">${r.label}</span></td>
+            </tr>`;
+          }).join("")}
+        </tbody>
+      </table>
+    </div>`;
+
+  const quickBtn=$("#quickAddForFilmBtn");
+  if(quickBtn){
+    quickBtn.onclick=()=>{
+      $("#logPanel").hidden=false;
+      $("#fFilm").value=f.name;
+      $("#fLang").value=f.lang;
+      $("#fRel").value=f.rel;
+      if(f.days.length)$("#fDate").value=f.days[f.days.length-1].date;
+      $("#fGross").focus();
+      $("#logPanel").scrollIntoView({behavior:"smooth",block:"start"});
+    };
+  }
+}
+
+function renderChips(){
+  const vis=getVisibleRows();
+  const ls=["All",...new Set(vis.map(f=>f.lang))];
+  $("#chips").innerHTML=`<span class="chips-label">Language:</span>`+ls.map(l=>`<button type="button" class="chip" aria-pressed="${S.lang===l}" data-l="${l}">${l}</button>`).join("");
+  const rs=["All","Good","Moderate","Bad"];
+  $("#ratingChips").innerHTML=`<span class="chips-label">Rating:</span>`+rs.map(r=>`<button type="button" class="chip" aria-pressed="${S.rating===r}" data-r="${r}">${r}</button>`).join("");
+  $("#filmList").innerHTML=films.map(f=>`<option value="${f.name}">`).join("");
+}
+
+function refreshAll(){
+  built=buildFilmsList();
+  films=built.list;
+  const vis=getVisibleRows();
+  if(!vis.some(f=>f.id===S.sel))S.sel=vis[0]?vis[0].id:null;
+  $("#bannerText").textContent=`Current Week Window: ${dt(built.weekStart)} – ${dt(built.maxDate)}, ${built.maxDate.getUTCFullYear()} · Showing ${S.top10Only?"Top 10 highest-collecting movies of the week":"all logged movies"}.`;
+  renderSummaryStrip();
+  renderChips();
+  renderLb();
+  renderDetail();
+}
+
+$("#q").oninput=e=>{S.q=e.target.value.trim().toLowerCase();renderLb()};
+$("#goodThr").oninput=e=>{
+  let g=+e.target.value,b=+$("#thr").value;
+  if(g>=b){b=g+1;$("#thr").value=b;$("#thrv").textContent=b+"%"}
+  $("#goodThrv").textContent=g+"%";
+  refreshAll();
+};
+$("#thr").oninput=e=>{
+  let b=+e.target.value,g=+$("#goodThr").value;
+  if(b<=g){g=Math.max(1,b-1);$("#goodThr").value=g;$("#goodThrv").textContent=g+"%"}
+  $("#thrv").textContent=b+"%";
+  refreshAll();
+};
+$("#chips").onclick=e=>{const l=e.target.dataset.l;if(l){S.lang=l;renderChips();renderLb()}};
+$("#ratingChips").onclick=e=>{const r=e.target.dataset.r;if(r){S.rating=r;renderChips();renderLb()}};
+$("#basisTradeBtn").onclick=()=>{S.combineProd=false;$("#basisTradeBtn").setAttribute("aria-pressed","true");$("#basisBothBtn").setAttribute("aria-pressed","false");refreshAll()};
+$("#basisBothBtn").onclick=()=>{S.combineProd=true;$("#basisTradeBtn").setAttribute("aria-pressed","false");$("#basisBothBtn").setAttribute("aria-pressed","true");refreshAll()};
+
+$("#top10OnlyBtn").onclick=()=>{
+  S.top10Only=true;
+  $("#top10OnlyBtn").setAttribute("aria-pressed","true");
+  $("#allFilmsBtn").setAttribute("aria-pressed","false");
+  refreshAll();
+};
+$("#allFilmsBtn").onclick=()=>{
+  S.top10Only=false;
+  $("#top10OnlyBtn").setAttribute("aria-pressed","false");
+  $("#allFilmsBtn").setAttribute("aria-pressed","true");
+  refreshAll();
+};
+
+$("#toggleLogBtn").onclick=()=>{
+  const p=$("#logPanel");
+  p.hidden=!p.hidden;
+  if(!p.hidden)$("#fGross").focus();
+};
+$("#closeLogBtn").onclick=()=>{$("#logPanel").hidden=true};
+
+$("#logForm").onsubmit=e=>{
+  e.preventDefault();
+  const entry={
+    film:$("#fFilm").value.trim(),
+    lang:$("#fLang").value,
+    rel:$("#fRel").value,
+    date:$("#fDate").value,
+    source:$("#fSource").value,
+    type:$("#fType").value,
+    gross:parseFloat($("#fGross").value)
+  };
+  if(!entry.film||isNaN(entry.gross)||entry.gross<=0)return;
+  customEntries.push(entry);
+  try{localStorage.setItem("bo_tracker_weekly_v1",JSON.stringify(customEntries))}catch(err){}
+  refreshAll();
+  const addedFilm=films.find(f=>f.name===entry.film);
+  if(addedFilm){S.sel=addedFilm.id;renderLb();renderDetail()}
+  const t=$("#logToast");
+  t.hidden=false;
+  t.textContent=`Saved: ${entry.film} (${entry.date}) — ₹${entry.gross.toFixed(2)} cr from ${entry.source} (${entry.type}).`;
+  $("#fGross").value="";
+};
+
+$("#exportCsvBtn").onclick=()=>{
+  const rows=[["film","date","gross","source","basis","type","notes"]];
+  films.forEach(f=>{
+    f.days.forEach(d=>{
+      Object.entries(d.tr||{}).forEach(([src,val])=>{
+        rows.push([f.name,d.date,val,src,"Net India","Trade estimate",""]);
+      });
+      if(d.p!=null){
+        rows.push([f.name,d.date,d.p,"Producer / Official poster","Net India","Producer-reported",""]);
+      }
+    });
+  });
+  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="weekly_top10_entries.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+$("#themeBtn").onclick=()=>{
+  const cur=document.documentElement.getAttribute("data-theme");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+};
+
+function pick(e){
+  const th=e.target.closest("th"),tr=e.target.closest("tbody tr");
+  if(th&&th.dataset.k){
+    S.dir=S.key===th.dataset.k?-S.dir:(th.dataset.k==="name"||th.dataset.k==="lang"||th.dataset.k==="weekRank"?1:-1);
+    S.key=th.dataset.k;
+    renderLb();
+  }else if(tr&&tr.dataset.id){
+    S.sel=+tr.dataset.id;
+    renderLb();
+    renderDetail();
+  }
+}
+$("#lb").onclick=pick;
+$("#lb").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(e)}};
+$("#detail").onclick=e=>{
+  const c=e.target.dataset.cum;
+  if(c!==undefined){S.cum=c==="1";renderDetail()}
+};
+
+if(INJECTED&&INJECTED.generated){
+  $("#footNote").append(" Last updated "+INJECTED.generated+".");
+}
+refreshAll();
+</script>
+</body>
+</html>
