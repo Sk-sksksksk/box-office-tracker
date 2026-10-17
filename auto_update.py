@@ -150,12 +150,18 @@ def main():
 
     print("Fetching latest Indian box office updates...")
     html = fetch_html(SACNILK_URL)
+
+    # ---- TEMPORARY DEBUG (remove after diagnosing) ----
     if html:
-    print(f"DEBUG: fetched {len(html)} chars")
-    m = re.search(r"<title>(.*?)</title>", html, re.I | re.S)
-    print("DEBUG: title =", m.group(1).strip() if m else None)
-    print("DEBUG: <tr> count =", len(re.findall(r"<tr", html, re.I)))
-    print("DEBUG: first 600 chars:\n", html[:600])
+        print(f"DEBUG: fetched {len(html)} chars")
+        m = re.search(r"<title>(.*?)</title>", html, re.I | re.S)
+        print("DEBUG: title =", m.group(1).strip() if m else None)
+        print("DEBUG: <tr> count =", len(re.findall(r"<tr", html, re.I)))
+        print("DEBUG: first 600 chars:\n", html[:600])
+    else:
+        print("DEBUG: html is None (fetch failed)")
+    # ---- END DEBUG ----
+
     entries = parse_trade_figures(html)
     if not entries:
         print("Note: Direct web scraper received 0 new rows or could not reach server. Checking existing data.")
