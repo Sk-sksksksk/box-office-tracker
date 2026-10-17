@@ -156,14 +156,19 @@ def main():
         print(f"DEBUG: fetched {len(html)} chars")
         Path("site").mkdir(exist_ok=True)
         Path("site/debug_sacnilk.html").write_text(html, encoding="utf-8")
-        for marker in ["__NEXT_DATA__", "application/ld+json", "<table", "<article", "<li", "<a href"]:
-            print(f"DEBUG: count of {marker} =", html.count(marker))
-        for kw in ["Jailer", "Drishyam", "Ranabaali", "Prahaar", "Comrade"]:
-            i = html.find(kw)
-            print(f"DEBUG: '{kw}' found at position {i}")
-            if i != -1:
-                print("DEBUG context:", html[max(0, i - 400):i + 700].replace("\n", " "))
-                break
+        def _txt(s):
+            s = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", s, flags=re.S | re.I)
+            s = re.sub(r"<[^>]+>", " | ", s)
+            s = re.sub(r"(\s*\|\s*)+", " | ", s)
+            return re.sub(r"\s+", " ", s).strip()
+        parts = html.split('class="movie-card')
+        print("DEBUG: movie-card count =", len(parts) - 1)
+        if len(parts) > 1:
+            print("DEBUG: TEXT BEFORE FIRST CARD:", _txt(parts[0])[-1500:])
+            for n in (1, 2, 3):
+                if n < len(parts):
+                    print(f"DEBUG: CARD {n} TEXT:", _txt(parts[n])[:900])
+            print("DEBUG: CARD 1 RAW (desktop part):", parts[1][-3500:].replace("\n", " "))
     else:
         print("DEBUG: html is None (fetch failed)")
     # ---- END DEBUG ----
