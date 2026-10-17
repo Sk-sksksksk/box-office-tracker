@@ -154,10 +154,16 @@ def main():
     # ---- TEMPORARY DEBUG (remove after diagnosing) ----
     if html:
         print(f"DEBUG: fetched {len(html)} chars")
-        m = re.search(r"<title>(.*?)</title>", html, re.I | re.S)
-        print("DEBUG: title =", m.group(1).strip() if m else None)
-        print("DEBUG: <tr> count =", len(re.findall(r"<tr", html, re.I)))
-        print("DEBUG: first 600 chars:\n", html[:600])
+        Path("site").mkdir(exist_ok=True)
+        Path("site/debug_sacnilk.html").write_text(html, encoding="utf-8")
+        for marker in ["__NEXT_DATA__", "application/ld+json", "<table", "<article", "<li", "<a href"]:
+            print(f"DEBUG: count of {marker} =", html.count(marker))
+        for kw in ["Jailer", "Drishyam", "Ranabaali", "Prahaar", "Comrade"]:
+            i = html.find(kw)
+            print(f"DEBUG: '{kw}' found at position {i}")
+            if i != -1:
+                print("DEBUG context:", html[max(0, i - 400):i + 700].replace("\n", " "))
+                break
     else:
         print("DEBUG: html is None (fetch failed)")
     # ---- END DEBUG ----
