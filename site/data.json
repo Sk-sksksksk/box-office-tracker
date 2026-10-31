@@ -1,5 +1,5 @@
 {
-  "generated": "30 Oct 2026",
+  "generated": "31 Oct 2026",
   "films": [
     {
       "name": "Drishyam 3: The Conclusion",
@@ -397,6 +397,426 @@
             "Box Office India": 0.33
           },
           "p": 0.4
+        }
+      ]
+    },
+    {
+      "name": "Dhurandhar 2: The RevengeHindi · Bollywood · released 19 Mar 2026All Time Blockbuster",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 1.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Spider-Man: Brand New DayEnglish · Hollywood · released 30 Jul 2026All Time BlockbusterDay 93 ₹2 L up ▲ 100.0%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 2.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Jailer 2Tamil · Kollywood · released 15 Oct 2026All Time BlockbusterDay 16 ₹5.50 Cr down ▼ 12.0%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 3.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Drishyam 3: The ConclusionHindi · Bollywood · released 2 Oct 2026BlockbusterDay 29 ₹1.00 Cr up ▲ 11.1%",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 4.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Hanuman AnshHindi · Bollywood · released 7 Aug 2026BlockbusterDay 85 ₹13 L up ▲ 44.4%",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 5.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Border 2Hindi · Bollywood · released 23 Jan 2026Super Hit",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 6.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "ToxicHindi · Sandalwood · released 26 Aug 2026Flop",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 7.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "PeddiTelugu · Tollywood · released 4 Jun 2026Below Average",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 8.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Mirzapur The MovieHindi · Bollywood · released 4 Sep 2026Super HitDay 57 ₹1 L no change = 0.0%",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 9.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Mana ShankaraVaraprasad GaruTelugu · Tollywood · released 12 Jan 2026Super Hit",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 10.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Jana NayaganTamil · Kollywood · released 23 Jul 2026Day 100 ₹1 L —",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 11.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "KaruppuTamil · Kollywood · released 15 May 2026Blockbuster",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 12.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "The OdysseyEnglish · Hollywood · released 17 Jul 2026Day 106 ₹3 L no change = 0.0%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 13.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "IrumudiTelugu · Tollywood · released 21 Aug 2026Blockbuster",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 14.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Bhooth BanglaHindi · Bollywood · released 17 Apr 2026Super Hit",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 15.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Dhamaal 4Hindi · Bollywood · released 10 Jul 2026Hit",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 16.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Bethlehem Kudumba UnitMalayalam · Mollywood · released 21 Aug 2026All Time Blockbuster",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 17.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Awarapan 2Hindi · Bollywood · released 14 Aug 2026Super HitDay 78 ₹1 L —",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 18.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "The Raja SaabTelugu · Tollywood · released 9 Jan 2026Flop",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 19.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Welcome To The Jungle (Welcome 3)Hindi · Bollywood · released 26 Jun 2026Average",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 20.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Hindi42.4%",
+      "lang": "Hindi",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 42.4
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Telugu18.1%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 18.1
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Tamil15.0%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 15.0
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "English9.3%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 9.3
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Malayalam7.5%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 7.5
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Kannada2.8%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 2.8
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Marathi2.2%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 2.2
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Punjabi0.9%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 0.9
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Bengali0.5%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 0.5
+          },
+          "p": null
+        }
+      ]
+    },
+    {
+      "name": "Gujarati0.5%",
+      "lang": "Other",
+      "rel": "2026-10-31",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "tr": {
+            "Sacnilk": 0.5
+          },
+          "p": null
         }
       ]
     }
