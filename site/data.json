@@ -1,5 +1,5 @@
 {
-  "generated": "11 Nov 2026",
+  "generated": "12 Nov 2026",
   "films": [
     {
       "name": "Drishyam 3: The Conclusion",
@@ -484,6 +484,13 @@
         },
         {
           "date": "2026-11-11",
+          "tr": {
+            "Sacnilk": 1.0
+          },
+          "p": null
+        },
+        {
+          "date": "2026-11-12",
           "tr": {
             "Sacnilk": 1.0
           },
@@ -3020,6 +3027,13 @@
           "date": "2026-11-11",
           "tr": {
             "Sacnilk": 2.0
+          },
+          "p": null
+        },
+        {
+          "date": "2026-11-12",
+          "tr": {
+            "Sacnilk": 3.0
           },
           "p": null
         }
